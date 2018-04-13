@@ -5,7 +5,7 @@ import action from 'action';
 import {connect} from 'react-redux';
 import { Button, Radio, Toast, Checkbox, Modal  } from 'antd-mobile';
 import { InputLabel, SelectLabel } from 'comp';
-import { request, openurl } from 'util';
+import { request, openurl, setUserInfo, getUserInfo } from 'util';
 import Clipboard from 'clipboard';
 import _ from 'lodash';
 import '../index.less';
@@ -37,7 +37,9 @@ export default class extends Component {
             rechargeCode: new Date().getTime() + '',
             targetUser: null,
             rechargeMoney: null,
-            showModal:false
+            showModal:false,
+            roleType: 0,
+            userinfo: null
         }
         if(shoppingData) {
             return _.assign({}, obj, shoppingData, {backMoneyList:null});
@@ -60,7 +62,10 @@ export default class extends Component {
                 let backMoneyList = res.data.map(item => ({label:item.money,value:item.money}));
                 this.setState({ backMoneyList });
             }
-        })
+        });
+        setUserInfo(() => {
+            getUserInfo((userinfo) => this.setState({userinfo}));
+        });
     }
     componentDidMount() {
         let clipboard = new Clipboard('.copy');
@@ -78,11 +83,15 @@ export default class extends Component {
         return `${bankName}(${bankNum.substring(bankNumLen-4,bankNumLen)})  ${owner}`;
     }
     handleSubmit = () => {
-        const {backCardList, key, rechargeMoney, rechargeCode, targetUser, isOthers} = this.state;
+        const {backCardList, key, rechargeMoney, rechargeCode, targetUser, isOthers, roleType} = this.state;
         const {file} = this.props;
         const reg = /^[A-Za-z0-9]+$/;
         if(!rechargeMoney) {
-            Toast.fail('请选择充值金额', 1);
+            Toast.fail(`${roleType==0?'请输入充值金额':'请选择充值金额'}`, 1);
+            return false;
+        }
+        if(rechargeMoney%100 != 0) {
+            Toast.fail('请输入100的整倍数', 1);
             return false;
         }
         if(isOthers&&!targetUser) {
@@ -100,7 +109,8 @@ export default class extends Component {
         let queryData = {
             rechargeMoney,
             companyBank: backCardList[key].value,
-            rechargeCode
+            rechargeCode,
+            isUpgrade: roleType
         }
         if(isOthers) _.assign(queryData, {targetUser});
         let param = {
@@ -109,7 +119,7 @@ export default class extends Component {
             ok:(res) => {
                 this.props.saveData({});
                 this.props.saveFile([]);
-                Toast.success('购物券兑换成功', 1,() => openurl('back'));
+                Toast.success('订单交易成功', 1,() => openurl('back'));
             }
         };
         let formData = new FormData();
@@ -118,7 +128,9 @@ export default class extends Component {
         request.rechargeAdd(param);
     }
     render() {
-        const {showModal,backCardList,backMoneyList,key,isOthers,rechargeCode,targetUser,rechargeMoney} = this.state;
+        const {showModal,backCardList,backMoneyList,key,isOthers,rechargeCode,targetUser,rechargeMoney,roleType,userinfo} = this.state;
+        let list = [{label: '会员充值',value: 0}];
+        if(!userinfo || userinfo.roleType < 3) list.push({label: '微股东充值',value: 1});
         return (
             <div className='shopping-voucher' style={{height: `${document.documentElement.clientHeight - 45}px`}}>
                 <Modal
@@ -133,29 +145,34 @@ export default class extends Component {
                     <input className="copyModal" value={backCardList&&backCardList[key].value}/>
                 </Modal>
                 <SelectLabel
+                    list={list}
+                    value={roleType}
+                    placeholder="请选择充值金额"
+                    onChange={roleType => this.setState({roleType, rechargeMoney: null})}
+                >充值选择：</SelectLabel>
+                {roleType==0&&<InputLabel
+                    value={rechargeMoney}
+                    type="number"
+                    placeholder="100元的倍数"
+                    onChange={rechargeMoney => {
+                        if(!rechargeMoney || rechargeMoney>99999900000) return false;
+                        this.setState({rechargeMoney});
+                    }}
+                >会员充值：</InputLabel>}
+                {roleType==1&&<SelectLabel
                     list={backMoneyList}
                     title="请选择金额"
                     showValue={rechargeMoney||null}
                     showDefault={rechargeMoney||null}
                     placeholder="请选择充值金额"
-                    onChange={price => {
-                        if(!price) return false;
-                        prompt('充值数量', '请输入充值数量', [
-                            { text: '确定', onPress: num => new Promise((resolve)=> {
-                                if(!num||num&&num>999999) {
-                                    Toast.info('请输入正确的数值', 1);
-                                    return false;
-                                }
-                                this.setState({rechargeMoney:price*num});
-                                resolve();
-                            })},
-                        ]);
+                    onChange={rechargeMoney => {
+                        if(!rechargeMoney) return false;
+                        this.setState({rechargeMoney});
                     }}
-                >充值金额：</SelectLabel>
+                >充值金额：</SelectLabel>}
                 <InputLabel
-                    value={rechargeMoney}
-                    type="number"
-                    disabled
+                    value={`${rechargeMoney || 0}元`}
+                    type="isText"
                 >共计金额：</InputLabel>
                 <h2 className="title">请选择商家账户</h2>
                 <div className="backList">

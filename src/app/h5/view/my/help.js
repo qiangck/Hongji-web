@@ -61,7 +61,7 @@ export default class extends Component {
     dongRender() {
         return (
             <Tabs
-                tabs={[{ title: '如何使用'},{ title: '如何获得'},{ title: '扣减规则'}]}
+                tabs={[{ title: '如何使用'},{ title: '如何获得'},{ title: '释放速度'}]}
                 initialPage={0}
                 renderTabBar={(type) => {
                     let active = type.activeTab;
@@ -83,31 +83,26 @@ export default class extends Component {
                 <div className='helpBox'>
                     <div className='helpItem'>
                         <ul className='helpContent'>
-                            <li>1.选择【首页】-> 点击【盾，进入交易页面。</li>
-                            <li>2.输入卖出数量，选择收款银行卡，输入交易密码。</li>
-                            <li>3.确认无误点击【确定】按钮即可获取卖盾收益。</li>
-                            <li>说明:系统审核通过后即可到达您的银行账户。</li>
+                            <li>1.选择【首页】-> 点击【数字货币】按钮，然后点击右上角提币按钮，输入GSC数量和转出地址，确认无误后点击立即提币即可。</li>
                         </ul>
                     </div>
                 </div>
                 <div className='helpBox'>
                     <div className='helpItem'>
                         <ul className='helpContent'>
-                            <li>1.充值送</li>
-                            <li>充值一单360元，送72盾持有资格，多单则叠加。</li>
-                            <li>盾单价(1-10元)，盾卖出后，一单封顶最多可得720元回报。</li>
-                            <li>温馨提示:内排期（盾单价从1元涨到10元为一个内排期）报单一次性得15盾，限前100人。</li>
-                            <li>2.系统派发</li>
-                            <li>开盘后（新一轮盾价周期开始日）每天释放给市场相当于前天报单数（一单为充值360元）130倍的盾，平均分配给拥有持盾资格的会员。若消费了多单，则平均分配多次。若重复消费则可持有总盾资格叠加。例如，充值2个360元的产品则可持有盾数为144。</li>
-                            <li>3.盾单价</li>
-                            <li>盾单价从1元到10元区间增长（只升不降），涨到10元为一个周期，再回归1元进入新周期。新周期开始，限量报单。100人一次性送15盾。依次类推，没有封顶的会员每一周期都会继续获得盾，直到封顶。</li>
+                            <li>1.升级为初级微股东，赠送价值2000元GSC(以实时价格计算)。</li>
+                            <li>2.升级为中级微股东，赠送价值10000元GSC(以实时价格计算)。</li>
+                            <li>3.升级为高级微股东，赠送价值20000元GSC(以实时价格计算)。</li>
                         </ul>
                     </div>
                 </div>
                 <div className='helpBox'>
                     <div className='helpItem'>
                         <ul className='helpContent'>
-                            <li>APP内卖出，后台审核通过并回款后会根据卖出盾数做扣减。</li>
+                            <li>以天为单位，1%余额定返。</li>
+                            <li>推荐一名初级微股东余额定返速度增加0.1‰;</li>
+                            <li>推荐一名中级微股东余额定返速度增加0.5‰;</li>
+                            <li>推荐一名高级微股东余额定返速度增加1‰;</li>
                         </ul>
                     </div>
                 </div>

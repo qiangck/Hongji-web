@@ -266,7 +266,7 @@ export default class extends Component {
                                     <p className="_icon">
                                         <img src='./resource/images/icon_wode_fuwuquan.png'/>
                                     </p>
-                                    <p className="_text">商标股流水</p>
+                                    <p className="_text">商标股</p>
                                 </Flex.Item>
                                 <Flex.Item onClick={()=>openurl('order/1')}>
                                     <p className="_icon">

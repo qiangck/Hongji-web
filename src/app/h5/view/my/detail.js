@@ -43,6 +43,7 @@ export default class extends Component {
         request.getTransactionTotal({
             data:{queryDate:date||queryDate,flowType},
             ok:(res) => {
+                const {tansactionNum2, tansactionNum1} = res.data;
                 this.setState({income:tansactionNum2,pay:tansactionNum1});
             }
         })
