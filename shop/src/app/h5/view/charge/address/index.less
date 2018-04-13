@@ -1,0 +1,87 @@
+.cartAddress {
+	background: #f4f4f4;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	position: relative;
+	.addressList {
+		padding-bottom: 48px;
+		.addressItem {
+		    background: #fff;
+		    position: relative;
+		    border-bottom: 1px solid #ddd;
+		    margin-bottom: 5px;
+		    .addressBox {
+		    	padding: 12px;
+				.address_content {
+			    	li {
+						word-wrap: break-word;
+						word-break: break-all;
+						font-size: 14px;
+						list-style-type: none;
+						overflow: hidden;
+						line-height: 1.4;
+						strong {
+							&.name {
+								float: left;
+							}
+							&.phone {
+								float: right;
+							}
+						}
+			    	}
+				}
+			}
+			.address_btn {
+				overflow: hidden;
+				border-top: 1px solid #ddd;
+				line-height: 40px;
+				height: 40px;
+				padding: 0 12px;
+				color: #666;
+				font-size: 14px;
+				.default {
+					float: left;
+					color: #ff4040;
+				}
+				.control {
+					float: right;
+					.edit {
+						padding-right: 5px;
+					}
+					img {
+						width:16px;
+						height: 17px;
+						vertical-align: middle;
+					}
+				}
+				span {
+					vertical-align: middle;
+					margin-left: 5px;
+				}
+			}
+		}
+	}
+	.addressAdd {
+		background: #ff4040;
+		height: 48px;
+		line-height: 48px;
+		text-align: center;
+		color: #fff;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		z-index: 10;
+		img {
+			width: 22px;
+			height: 22px;
+			vertical-align: middle;
+		}
+		span {
+			vertical-align: middle;
+			margin-left: 5px;
+		}
+	}
+}
+

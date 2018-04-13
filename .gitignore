@@ -1,0 +1,15 @@
+/dist/*
+/rev/*
+/node_modules/*
+/.idea/*
+yarn.lock
+*/.DS_Store
+/src/util/*
+shop/src/util/*
+newEdition/src/util/*
+/build/*
+shop/build/*
+newEdition/build/*
+/src/app/h5/index.js
+shop/src/app/h5/index.js
+newEdition/src/app/h5/index.js

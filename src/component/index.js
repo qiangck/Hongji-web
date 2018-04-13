@@ -1,0 +1,12 @@
+module.exports={
+    FrameContainer:require('./frame-container').default,
+    GoodsItem:require('./goods-item').default,
+    Adjust:require('./adjust').default,
+    InputLabel:require('./input-label').default,
+    SelectLabel:require('./select-label').default,
+    ManageItem:require('./manage-item').default,
+    DefatulFace:require('./default-face').default,
+    Loading:require('./loading').default,
+    DatePicker:require('./datePicker').default,
+    DatePickerUp:require('./datePickerUp').default,
+};

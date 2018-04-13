@@ -1,0 +1,213 @@
+.confirm {
+	background: #f4f4f4;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	.address{
+	    background: #fff;
+	    padding: 12px 10px;
+	    position: relative;
+	    border-bottom: 1px solid #ddd;
+	    margin-bottom: 5px;
+		.location {
+			width: 23px;
+			height: 23px;
+			position: absolute;
+			top: 23px;
+			left: 23px;
+			z-index: 10;
+		}
+		.address_content {
+			position: relative;
+	    	padding-left: 50px;
+	    	padding-right: 30px;
+	    	li {
+				word-wrap: break-word;
+				word-break: break-all;
+				font-size: 14px;
+				list-style-type: none;
+				overflow: hidden;
+				line-height: 1.6;
+				strong {
+					&.name {
+						float: left;
+					}
+					&.phone {
+						float: right;
+					}
+				}
+	    	}
+		}
+		.icon {
+			position: absolute;
+			top: 30px;
+			right: 11px;
+			z-index: 10;
+		}
+	}
+	.cartBox {
+	    position: relative;
+	    background: #fff;
+	    overflow: hidden;
+	    border-bottom: 1px solid #ddd;
+	    &:nth-child(n+2) {
+	    	border-top: 1px solid #ddd;
+    	}
+		.cartHead {
+			box-sizing: border-box;
+			position: relative;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			align-items: center;
+			padding: 10px 10px 10px 22px;
+			min-height: 45px;
+			z-index: 1;
+			min-height: 45px;
+			.headName {
+				-webkit-box-flex: 1;
+				-webkit-flex: 1;
+				flex: 1;
+				box-sizing: border-box;
+				display: inline-block;
+				font-size: 16px;
+				padding-right: 10px;
+				width: 100%;
+				color: #333;
+			}
+		}
+		.cartItem {
+			z-index: 1;
+		    position: relative;
+		    min-height: 75px;
+		    padding: 15px 10px 15px 98px;
+		    background: #fff;
+		    overflow: hidden;
+		    border-top: 1px solid #ddd;
+		    margin-left: 10px;
+		    -webkit-overflow-scrolling: touch;
+		    .cartImage {
+				position: absolute;
+				left: 13px;
+				top: 15px;
+				display: block;
+				width: 75px;
+				height: 75px;
+				z-index: 10;
+		    }
+		    .content {
+		    	min-height: 75px;
+		    	.name {
+					font-size: 14px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
+					line-height: 1.5;
+					color: #333;
+					height: 40px;
+		    	}
+		    	.line {
+					position: relative;
+					display: -webkit-box;
+					display: -webkit-flex;
+					display: flex;
+					-webkit-box-align: center;
+					-webkit-align-items: center;
+					align-items: center;
+					margin: 10px 0 2px;
+					.price {
+						-webkit-box-flex: 1;
+						-webkit-flex: 1;
+						flex: 1;
+						line-height: 16px;
+						color: #e93b3d;
+						font-size: 16px;
+					}
+		    	}
+		    }
+		}
+	}
+	.count {
+		position: relative;
+	    margin: 0 auto;
+	    max-width: 540px;
+	    height: 50px;
+	    background: #fff;
+	    color: #333;
+	    font-size: 14px;
+	    z-index: 99;
+	    margin-bottom: 50px;
+	    border-bottom: 1px solid #ddd;
+	    .total {
+			position: absolute;
+			top: 0;
+			right: 0;
+			p {
+				height: 50px;
+				line-height: 50px;
+				text-align: right;
+				float: left;
+				font-size: 16px;
+			}
+			a {
+				float: right;
+				display: block;
+				height: 50px;
+				margin-left: 10px;
+				line-height: 50px;
+				font-size: 16px;
+				text-align: center;
+				color: #333;
+				padding-right: 10px;
+				i {
+					color: #e93b3d;
+					font-style: normal;
+				}
+			}
+	    }
+	}
+	.fixBar {
+		position: fixed;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    margin: 0 auto;
+	    max-width: 540px;
+	    height: 50px;
+	    background: #fff;
+	    color: #333;
+	    font-size: 14px;
+	    z-index: 99;
+	    .total {
+			position: absolute;
+			top: 0;
+			right: 0;
+			p {
+				height: 50px;
+				line-height: 50px;
+				text-align: right;
+				float: left;
+				font-size: 16px;
+				strong {
+					color: #e93b3d;
+				}
+			}
+			a {
+				float: right;
+				display: block;
+				width: 110px;
+				height: 50px;
+				margin-left: 10px;
+				line-height: 50px;
+				font-size: 16px;
+				text-align: center;
+				background: #e4393c;
+				color: #fff;
+			}
+	    }
+	}
+}
