@@ -295,7 +295,7 @@ export default class extends Component {
                                     </p>
                                     <p className="_text">提币流水</p>
                                 </Flex.Item>
-                                <Flex.Item  onClick={()=>openurl('sign')} className="suspend">
+                                <Flex.Item  onClick={()=>openurl('sign')}>
                                     <p className="_icon">
                                         <img src='./resource/images/iconqiandao2x.png'/>
                                     </p>
@@ -303,9 +303,6 @@ export default class extends Component {
                                 </Flex.Item>
                                 <Flex.Item>
                                 </Flex.Item>
-                                <Flex.Item>
-                                </Flex.Item>
-
                             </Flex>
                             <div className="invitation" onClick={()=>openurl('recommend')}>
                                 <img src='./resource/images/img_banner_wode.jpg'/>

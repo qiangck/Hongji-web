@@ -24,9 +24,7 @@ export default class extends Component {
         request.getChildRechargeRecord({
             data: {},
             ok: (res) => {
-                this.setState({
-                    noticeList:res.data.map((item, index) => item.content)
-                });
+                this.setState({noticeList:res.data});
             }
         });
     }

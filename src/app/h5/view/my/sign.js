@@ -3,7 +3,7 @@ import React,{Component} from 'react';
 import { Button, Toast, Modal, Flex, NoticeBar } from 'antd-mobile';
 import { InputLabel, SelectLabel } from 'comp';
 import { request, setUserInfo, getUserInfo, openurl } from 'util';
-import './sign.less';
+import './index.less';
 export default class extends Component {
     constructor(props) {
         super(props);
@@ -125,7 +125,7 @@ export default class extends Component {
     render() {
         const {result} = this.state;
         return (
-            <div className='sign_page'>   
+            <div className='sign_page' style={{height: document.documentElement.clientHeight - 45}}>   
                 {/* 头部 */}
                 <div className='head_background'>
                     <img src="./resource/images/icon_signbg.png"/>
