@@ -1,6 +1,6 @@
 'use strict';
 import React,{Component} from 'react';
-import {request, openurl} from 'util';
+import {request, openurl, isObjectNull} from 'util';
 import { Accordion,List,NoticeBar } from 'antd-mobile';
 import '../index.less';
 export default class extends Component {
@@ -77,7 +77,7 @@ export default class extends Component {
         const {json,noticeList} = this.state;
         return (
             <div className='team'>
-                <NoticeBar marqueeProps={{ loop: true, style: { padding: '0' } }}>{noticeList&&noticeList.join(' ')}</NoticeBar>
+                <NoticeBar marqueeProps={{ loop: true, style: { padding: '0' } }}>{noticeList&&!isObjectNull(noticeList)&&noticeList.join(' ')}</NoticeBar>
                 {json&&this.accordionList(json, 'first')}
                 {!json&&<div className='teamBox'>
                     <div className='team_center'>
