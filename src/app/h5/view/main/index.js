@@ -154,7 +154,7 @@ export default class extends Component {
                                                     </div>}
                                                     {!isNull&&<span className="_name">未登录</span>}</p>
 
-                                            <p><span className="label">封顶积分:</span><span className="value">{isNull?userinfo.dongPrice:0}</span></p>
+                                            <p><span className="label">封顶积分:</span><span className="value">{isNull?userinfo.holdIntNum:0}</span></p>
                                             <p><span className="label">结余积分:</span><span className="value">{this.numFormat('holdDongNum')}</span></p>
                                         </div>
                                     </div>

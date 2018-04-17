@@ -56,16 +56,33 @@ export default class extends Component {
                 this.setState({backCardList});
             }
         });
-        request.getMoneyType({
-            data:{},
-            ok:(res) => {
-                let backMoneyList = res.data.map(item => ({label:item.money,value:item.money}));
-                this.setState({ backMoneyList });
-            }
-        });
+        // request.getMoneyType({
+        //     data:{},
+        //     ok:(res) => {
+        //         console.log(res.data)
+        //         let backMoneyList = res.data.map(item => ({label:item.money,value:item.money}));
+        //         this.setState({ backMoneyList });
+        //     }
+        // });
         setUserInfo(() => {
-            getUserInfo((userinfo) => this.setState({userinfo}));
+            getUserInfo((userinfo) => {
+                this.setState({userinfo,backMoneyList:this.setUserList(userinfo)})
+            });
         });
+    }
+    setUserList = (info) => {
+        let backMoneyList = [];
+        const userinfo = this.state.userinfo;
+        switch((info||userinfo).roleType) {
+            case 1:
+                backMoneyList.push({label:'50000',value:'50000'},{label:'100000',value:'100000'});
+                break;
+            case 2:
+                backMoneyList.push({label:'100000',value:'100000'});
+                break;
+            default: return false;
+        }
+        return backMoneyList;
     }
     componentDidMount() {
         let clipboard = new Clipboard('.copy');
@@ -200,7 +217,17 @@ export default class extends Component {
                         checked={isOthers}
                         onChange={e => {
                             e.stopPropagation();
-                            this.setState({isOthers:e.target.checked})
+                            let backMoneyList = this.state.backMoneyList;
+                            if(e.target.checked) {
+                                backMoneyList = [
+                                    {label:'10000',value:'10000'},
+                                    {label:'50000',value:'50000'},
+                                    {label:'100000',value:'100000'}
+                                ];
+                            } else {
+                                backMoneyList = this.setUserList();
+                            }
+                            this.setState({isOthers:e.target.checked,backMoneyList,rechargeMoney:null});
                         }}
                     >为他人充值</Checkbox>
                 </div>
