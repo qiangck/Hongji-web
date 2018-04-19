@@ -44,11 +44,11 @@
 							height: 75px;
 						}
 						._user {
-							
+							text-align: center;
 							._face {
 								// margin:0 suto;
 								// float: left;
-								margin-left: 29px;
+								// margin-left: 29px;
 								position: relative;
 								img {
 									width: 45px;
@@ -59,7 +59,7 @@
 								.v {
 									position: absolute;
 									top: -2px;
-									right: -4px;
+									right: 3px;
 									z-index: 10;
 									img {
 										width: 20px;
@@ -74,7 +74,7 @@
 								._name{
 								    margin-top: 6px;
                                     // padding-left: 30px;
-                                    text-align: right;
+                                    text-align: center;
                                     color: #6c6d68;
 								}
 								._phone {
@@ -149,11 +149,13 @@
 						left: 14px;
 						top: 8px;
 						padding: 6px;
+						overflow: hidden;
 						&.disable {
 							background: rgba(169, 169, 169, 0.7);
 						}
 						.box_title {
 							color: #000;
+							float: left;
 							.box_title_icon {
 							    vertical-align: middle;
 							    height: 17px;
@@ -176,10 +178,11 @@
 						    width: 80%;
 						    left: 30px;
 						    padding-left: 34px;
+						    padding-right: 34px;
 						    padding-top: 18px;
 						    .box_title_icon{
 						        height: 27px;
-						        margin-right: 20px;
+						        margin-right: 6px;
 						    }
 						    p{
 						        display: inline-block;
@@ -187,7 +190,8 @@
 						    }
 						    .box_num{
 						        width: 50px;
-						        margin-left: 70px;
+						        float: right;
+						        // margin-left: 70px;
 						    }
 						}
 					}

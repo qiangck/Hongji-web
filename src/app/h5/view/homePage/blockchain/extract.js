@@ -1,6 +1,6 @@
 'use strict';
 import React,{Component} from 'react';
-import { Button, Toast  } from 'antd-mobile';
+import { Button, Toast, Modal } from 'antd-mobile';
 import { InputLabel } from 'comp';
 import { request, openurl, getUserInfo, setUserInfo } from 'util';
 import '../index.less';
@@ -33,15 +33,22 @@ export default class extends Component {
             Toast.fail('请填写提币地址', 1);
             return false;
         }
-        request.gscFlowSave({
-            data:{amount,monyAddren},
-            ok:(res) => {
-                Toast.info('提币成功', 1, ()=>openurl('back'));
+        Modal.prompt(
+            '交易密码',
+            '请输入交易密码进行提币',
+            password => {
+                request.gscFlowSave({
+                    data:{amount,monyAddren},
+                    ok:(res) => {
+                        Toast.info('提币成功', 1, ()=>openurl('back'));
+                    },
+                    error: ()=> {
+                        Toast.offline('网络异常', 2,() => window.location.reload(true));
+                    }
+                });
             },
-            error: ()=> {
-                Toast.offline('网络异常', 2,() => window.location.reload(true));
-            }
-        });
+            'secure-text'
+        )
     }
     render() {
         const {gscMax, amount} = this.state;

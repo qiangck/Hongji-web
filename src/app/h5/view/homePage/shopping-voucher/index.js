@@ -74,6 +74,13 @@ export default class extends Component {
         let backMoneyList = [];
         const userinfo = this.state.userinfo;
         switch((info||userinfo).roleType) {
+            case 0:
+                backMoneyList.push(
+                    {label:'10000',value:'10000'},
+                    {label:'50000',value:'50000'},
+                    {label:'100000',value:'100000'}
+                );
+                break;
             case 1:
                 backMoneyList.push({label:'50000',value:'50000'},{label:'100000',value:'100000'});
                 break;

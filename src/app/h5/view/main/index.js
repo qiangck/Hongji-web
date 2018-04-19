@@ -140,9 +140,7 @@ export default class extends Component {
                                                     {userinfo.roleType==3&&<span className="v"><img src="./resource/images/v3.svg"/></span>}
                                                 </div>
                                                 <div className="_userinfo">
-                                                    {isNull&&<div>
-                                                        <p className="_name">{userinfo.nickName}</p>
-                                                    </div>}
+                                                    {isNull&&<p className="_name">{userinfo.nickName}</p>}
                                                 </div>
                                             </div>
 
@@ -162,16 +160,13 @@ export default class extends Component {
                                 </div>
                                 <ul className="content">
                                     <li className="jf">
-                                        <div
-                                            className={`box ${!isNull||userinfo.roleType<=0?'disable':''}`}
-                                            onClick={userinfo.roleType>0?()=>openurl('integral'):()=>{}}
-                                        >
-                                            <p className="box_title">
+                                        <div className="box" onClick={()=>openurl('integral')}>
+                                            <span className="box_title">
                                                 <img
                                                     className="box_title_icon"
                                                     src='./resource/images/icon_jife.png'
-                                                />积分</p>
-                                            <p className="box_num">{this.numFormat('integration')}</p>
+                                                />积分</span>
+                                            <span className="box_num">{this.numFormat('integration')}</span>
                                         </div>
                                     </li>
                                     <li className="sbg">
@@ -295,11 +290,13 @@ export default class extends Component {
                                     </p>
                                     <p className="_text">提币流水</p>
                                 </Flex.Item>
-                                <Flex.Item  onClick={()=>openurl('sign')}>
+                                {/**<Flex.Item  onClick={()=>openurl('sign')}>
                                     <p className="_icon">
                                         <img src='./resource/images/iconqiandao2x.png'/>
                                     </p>
                                     <p className="_text">签到</p>
+                                </Flex.Item>**/}
+                                <Flex.Item>
                                 </Flex.Item>
                                 <Flex.Item>
                                 </Flex.Item>
