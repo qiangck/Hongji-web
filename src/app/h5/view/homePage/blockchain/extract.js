@@ -36,9 +36,9 @@ export default class extends Component {
         Modal.prompt(
             '交易密码',
             '请输入交易密码进行提币',
-            password => {
+            transactionPassword => {
                 request.gscFlowSave({
-                    data:{amount,monyAddren},
+                    data:{amount,monyAddren,transactionPassword},
                     ok:(res) => {
                         Toast.info('提币成功', 1, ()=>openurl('back'));
                     },

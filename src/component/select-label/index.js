@@ -1,6 +1,7 @@
 'use strict';
 import React,{Component} from 'react';
 import { Flex, Radio, Modal  } from 'antd-mobile';
+import { isObjectNull } from 'util';
 import './index.less';
 export default class extends Component {
     constructor(props) {
@@ -12,13 +13,16 @@ export default class extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
-        const {value,list} = nextProps;
+        const {value,list,onChange} = nextProps;
         if(value!=null&&list!=null) {
             let stateObj = {};
             list.map((item, index) => {
                 if(item.value == value) stateObj = {activeItem: item,key: index};
             });
-            this.setState(stateObj);
+            if(isObjectNull(stateObj)) {
+                (typeof onChange == 'function')&&(onChange(null));
+                this.setState({activeItem:null});
+            }
         }
     }
     handleChange = (key, e) => {

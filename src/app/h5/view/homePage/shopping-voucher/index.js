@@ -39,7 +39,8 @@ export default class extends Component {
             rechargeMoney: null,
             showModal:false,
             roleType: 0,
-            userinfo: null
+            userinfo: null,
+            list: []
         }
         if(shoppingData) {
             return _.assign({}, obj, shoppingData, {backMoneyList:null});
@@ -64,11 +65,16 @@ export default class extends Component {
         //         this.setState({ backMoneyList });
         //     }
         // });
-        setUserInfo(() => {
-            getUserInfo((userinfo) => {
-                this.setState({userinfo,backMoneyList:this.setUserList(userinfo)})
+                    getUserInfo((userinfo) => {
+                this.setState({
+                    userinfo,
+                    list:this.setUserInput(userinfo),
+                    backMoneyList:this.setUserList(userinfo)
+                });
             });
-        });
+        // setUserInfo(() => {
+
+        // });
     }
     setUserList = (info) => {
         let backMoneyList = [];
@@ -90,6 +96,10 @@ export default class extends Component {
             default: return false;
         }
         return backMoneyList;
+    }
+    setUserInput = (info) => {
+        const userinfo = this.state.userinfo;
+        return (info||userinfo).roleType<3?[{label: '会员充值',value: 0},{label: '微股东充值',value: 1}]:[{label: '会员充值',value: 0}]
     }
     componentDidMount() {
         let clipboard = new Clipboard('.copy');
@@ -152,9 +162,7 @@ export default class extends Component {
         request.rechargeAdd(param);
     }
     render() {
-        const {showModal,backCardList,backMoneyList,key,isOthers,rechargeCode,targetUser,rechargeMoney,roleType,userinfo} = this.state;
-        let list = [{label: '会员充值',value: 0}];
-        if(!userinfo || userinfo.roleType < 3) list.push({label: '微股东充值',value: 1});
+        const {list,showModal,backCardList,backMoneyList,key,isOthers,rechargeCode,targetUser,rechargeMoney,roleType,userinfo} = this.state;
         return (
             <div className='shopping-voucher' style={{height: `${document.documentElement.clientHeight - 45}px`}}>
                 <Modal
@@ -186,8 +194,6 @@ export default class extends Component {
                 {roleType==1&&<SelectLabel
                     list={backMoneyList}
                     title="请选择金额"
-                    showValue={rechargeMoney||null}
-                    showDefault={rechargeMoney||null}
                     placeholder="请选择充值金额"
                     onChange={rechargeMoney => {
                         if(!rechargeMoney) return false;
@@ -225,16 +231,22 @@ export default class extends Component {
                         onChange={e => {
                             e.stopPropagation();
                             let backMoneyList = this.state.backMoneyList;
+                            let list = [];
                             if(e.target.checked) {
+                                list = [
+                                    {label: '会员充值',value: 0},
+                                    {label: '微股东充值',value: 1}
+                                ]
                                 backMoneyList = [
                                     {label:'10000',value:'10000'},
                                     {label:'50000',value:'50000'},
                                     {label:'100000',value:'100000'}
                                 ];
                             } else {
+                                list = this.setUserInput();
                                 backMoneyList = this.setUserList();
                             }
-                            this.setState({isOthers:e.target.checked,backMoneyList,rechargeMoney:null});
+                            this.setState({list,isOthers:e.target.checked,backMoneyList,rechargeMoney:null});
                         }}
                     >为他人充值</Checkbox>
                 </div>
