@@ -65,16 +65,15 @@ export default class extends Component {
         //         this.setState({ backMoneyList });
         //     }
         // });
-                    getUserInfo((userinfo) => {
+        setUserInfo(() => {
+            getUserInfo((userinfo) => {
                 this.setState({
                     userinfo,
                     list:this.setUserInput(userinfo),
                     backMoneyList:this.setUserList(userinfo)
                 });
             });
-        // setUserInfo(() => {
-
-        // });
+        });
     }
     setUserList = (info) => {
         let backMoneyList = [];
