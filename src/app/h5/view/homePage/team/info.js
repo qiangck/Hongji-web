@@ -112,10 +112,10 @@ export default class extends Component {
         return (
             <div className='teamInfo'>
                 {list&&<List id="listDom">
-                    <Item extra={list.userName||null}>用户名</Item>}
-                    <Item extra={list.nickName||null}>姓名</Item>}
+                    <Item extra={list.userName||null}>用户名</Item>
+                    <Item extra={list.nickName||null}>姓名</Item>
                     <WhiteSpace size="lg" style={{background: '#f4f4f4'}}/>
-                    <Item extra={format.formatTime(new Date(list.birthday||null))}>出生日期</Item>
+                    <Item extra={list.birthday?format.formatTime(new Date(list.birthday||null)):'空'}>出生日期</Item>
                     {this.roleRender(list.roleType)}
                 </List>}
                 <DatePickerUp onChange={date => {
