@@ -113,6 +113,8 @@ export default class extends Component {
                         sessionStorage.setItem("tabIndex", index);
                         this.setState({active: index});
                     }}
+                    swipeable={false}
+                    animated={false}
                     tabBarPosition="bottom"
                 >
                     <div className="tabs">
