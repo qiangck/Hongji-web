@@ -1,6 +1,6 @@
 'use strict';
 import React,{Component} from 'react';
-import { Button, Toast, Modal } from 'antd-mobile';
+import { Button, Toast, Modal, InputItem } from 'antd-mobile';
 import { InputLabel } from 'comp';
 import { request, openurl, getUserInfo, setUserInfo } from 'util';
 import '../index.less';
@@ -10,7 +10,9 @@ export default class extends Component {
         this.state = {
             gscMax: null,
             amount: null,
-            monyAddren: null
+            monyAddren: null,
+            transactionPassword: null,
+            visible: false
         }
     }
     componentWillMount () {}
@@ -33,27 +35,53 @@ export default class extends Component {
             Toast.fail('请填写提币地址', 1);
             return false;
         }
-        Modal.prompt(
-            '交易密码',
-            '请输入交易密码进行提币',
-            transactionPassword => {
-                request.gscFlowSave({
-                    data:{amount,monyAddren,transactionPassword},
-                    ok:(res) => {
-                        Toast.info('提币成功', 1, ()=>openurl('back'));
-                    },
-                    error: ()=> {
-                        Toast.offline('网络异常', 2,() => window.location.reload(true));
-                    }
-                });
-            },
-            'secure-text'
-        )
+        this.setState({visible:true});
+    }
+    onWrapTouchStart = (e) => {
+        // fix touch to scroll background page on iOS
+        if (!/iPhone|iPod|iPad/i.test(navigator.userAgent)) {
+            return;
+        }
+        const pNode = closest(e.target, '.am-modal-content');
+        if (!pNode) {
+            e.preventDefault();
+        }
     }
     render() {
-        const {gscMax, amount} = this.state;
+        const {gscMax, amount, monyAddren,transactionPassword} = this.state;
         return (
             <div className='blockchain'>
+                <Modal
+                    visible={this.state.visible}
+                    transparent
+                    maskClosable={false}
+                    title="交易密码"
+                    footer={[
+                        {text: '取消',onPress: () => {
+                            this.setState({visible:false,transactionPassword:null})
+                        }},
+                        {text: '确定',onPress: () => {
+                            request.gscFlowSave({
+                                data:{amount,monyAddren,transactionPassword},
+                                ok:(res) => {
+                                    this.setState({visible:false});
+                                    Toast.info('提币成功', 1, ()=>openurl('back'));
+                                },
+                                error: ()=> {
+                                    Toast.offline('网络异常', 2,() => window.location.reload(true));
+                                }
+                            });
+                        }}
+                    ]}
+                    wrapProps={{ onTouchStart: this.onWrapTouchStart }}
+                >
+                    <p>请输入交易密码进行提币</p>
+                    <InputItem
+                        type="password"
+                        onChange={(transactionPassword) => {this.setState({transactionPassword})}}
+                        style={{border:'1px solid #ccc'}}
+                    />
+                </Modal>
                 <InputLabel
                     value={amount}
                     type="number"

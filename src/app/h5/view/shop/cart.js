@@ -129,7 +129,7 @@ export default class extends Component {
                                 }}/>
                                 <div className='content'>
                                     <div className='name'>{cartList[item].name}</div>
-                                    <div className='line'>
+                                    <div className='lines'>
                                         <p className='price'>{cartList[item].price}购物券</p>
                                         <Adjust value={cartList[item].value} onChange={this.adjust.bind(this,item)}/>
                                     </div>

@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import {Adjust} from 'comp';
 import {loading} from 'method';
 import {request,openurl,isObjectNull} from 'util';
-import { Icon,Toast,Modal } from 'antd-mobile';
+import { Icon,Toast,Modal,InputItem } from 'antd-mobile';
 import './index.less';
 const alert = Modal.alert;
 @connect(
@@ -20,7 +20,9 @@ export default class extends Component {
             list: {},
             addressList: [],
             total: 0,
-            number: 0
+            number: 0,
+            transcationPwd: null,
+            visible: false
         }
     }
     propsParam() {
@@ -86,34 +88,20 @@ export default class extends Component {
             Toast.info('购物车为空',2,() => openurl('back'));
             return false;
         }
-        Modal.prompt(
-            '交易密码',
-            '请输入交易密码进行支付',
-            password => {
-                let productParam = [];
-                _.keys(list).map(item => {
-                    let str = '';
-                    str = `${item}:${list[item].value}`;
-                    productParam.push(str);
-                });
-                request.productSave({
-                    data: {
-                        productCode: productParam.join('|'),
-                        integrationNum: total,
-                        num: number,
-                        transcationPwd: password,
-                        user_address: addressList[0].userAddress
-                    },
-                    ok:(res) => {
-                        Toast.success('提交订单成功', 1,() => openurl('$success'));
-                    }
-                })
-            },
-            'secure-text'
-        )
+        this.setState({visible:true});
+    }
+    onWrapTouchStart = (e) => {
+        // fix touch to scroll background page on iOS
+        if (!/iPhone|iPod|iPad/i.test(navigator.userAgent)) {
+            return;
+        }
+        const pNode = closest(e.target, '.am-modal-content');
+        if (!pNode) {
+            e.preventDefault();
+        }
     }
     render() {
-        const {list,total,number,addressList} = this.state;
+        const {list,total,number,addressList,transcationPwd} = this.state;
         return (
             <div className='shop_confirm'>
                 {addressList.length > 0&&<div className='address' onClick={() => openurl('address')}>
@@ -143,7 +131,7 @@ export default class extends Component {
                                 }}/>
                                 <div className='content'>
                                     <div className='name'>{list[item].name}</div>
-                                    <div className='line'>
+                                    <div className='lines'>
                                         <p className='price'>{list[item].price}购物券</p>
                                         <p className='num'>x{list[item].value}</p>
                                     </div>
@@ -164,6 +152,46 @@ export default class extends Component {
                         <a onClick={this.submit}>提交订单</a>
                     </div>
                 </div>
+                <Modal
+                    visible={this.state.visible}
+                    transparent
+                    maskClosable={false}
+                    title="交易密码"
+                    footer={[
+                        {text: '取消',onPress: () => {
+                            this.setState({visible:false,transcationPwd:null});
+                        }},
+                        {text: '确定',onPress: () => {
+                            let productParam = [];
+                            _.keys(list).map(item => {
+                                let str = '';
+                                str = `${item}:${list[item].value}`;
+                                productParam.push(str);
+                            });
+                            request.productSave({
+                                data: {
+                                    productCode: productParam.join('|'),
+                                    integrationNum: total,
+                                    num: number,
+                                    transcationPwd,
+                                    user_address: addressList[0].userAddress
+                                },
+                                ok:(res) => {
+                                    this.setState({visible:false,transcationPwd:null});
+                                    Toast.success('提交订单成功', 1,() => openurl('$success'));
+                                }
+                            })
+                        }}
+                    ]}
+                    wrapProps={{ onTouchStart: this.onWrapTouchStart }}
+                >
+                    <p>请输入交易密码进行支付</p>
+                    <InputItem
+                        type="password"
+                        onChange={(transcationPwd) => {this.setState({transcationPwd})}}
+                        style={{border:'1px solid #ccc'}}
+                    />
+                </Modal>
             </div>
         );
     }

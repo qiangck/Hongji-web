@@ -62,7 +62,7 @@ export default class extends Component {
                 <div className="loginMain" style={{width:_width,height:_height}}>
                     <div className='info'>
                         <img src="./resource/images/img-logoxxxhdpi.png"/>
-                        <p>宏德百年 济世致远</p>
+                        <p>泓德百年 济世致远</p>
                     </div>
                     <div className='content'>
                         <div><input
