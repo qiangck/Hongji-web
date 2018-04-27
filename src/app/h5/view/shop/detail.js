@@ -36,8 +36,10 @@ export default class extends Component {
             }
         });
     }
-    addShopCart = () => {
-        Toast.success('加入购物车成功', 1);
+    addShopCart = (bool) => {
+        if(!bool) {
+            Toast.success('加入购物车成功', 1);
+        }
         const {name,price,productCode,imgUrl} = this.state.product;
         const {value} = this.state;
         let json = {
@@ -77,8 +79,13 @@ export default class extends Component {
         return (
             <div className='shop_detail'>
                 <div className='cartColum'>
-                    <a className='myCard' onClick={()=> openurl('shopCart')}>我的购物车</a>
-                    <a className='addCard' onClick={this.addShopCart}>加入购物车</a>
+                    <a className='myCard' onClick={()=> {
+                        this.addShopCart(true);
+                        setTimeout(()=>{
+                            openurl('shopCart');
+                        },500);
+                    }}>立即购买</a>
+                    <a className='addCard' onClick={this.addShopCart.bind(this,false)}>加入购物车</a>
                 </div>
                 <div className='product'>
                     <div className="productImage">
