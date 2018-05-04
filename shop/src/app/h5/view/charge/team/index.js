@@ -12,8 +12,9 @@ export default class extends Component {
         request.teamList({
             data: {},
             ok: (res) => {
-                if(res.data.length > 0) {
-                    this.setState({json:res.data[0]});
+                if(res.data&&res.data.teamList&&res.data.teamList.length) {
+                    this.setState({json:res.data.teamList[0]});
+
                 }
             }
         });
