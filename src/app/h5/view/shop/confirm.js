@@ -132,7 +132,7 @@ export default class extends Component {
                                 <div className='content'>
                                     <div className='name'>{list[item].name}</div>
                                     <div className='lines'>
-                                        <p className='price'>{list[item].price}购物券</p>
+                                        <p className='price'>{list[item].price}￥</p>
                                         <p className='num'>x{list[item].value}</p>
                                     </div>
                                 </div>
@@ -143,12 +143,12 @@ export default class extends Component {
                 <div className='count'>
                     <div className='total'>
                         <p>共{number}件商品</p>
-                        <a>小计：<i>{total}购物券</i></a>
+                        <a>小计：<i>{total}￥</i></a>
                     </div>
                 </div>
                 <div className='fixBar'>
                     <div className='total'>
-                        <p>实付款：<strong>{total}购物券</strong></p>
+                        <p>实付款：<strong>{total}￥</strong></p>
                         <a onClick={this.submit}>提交订单</a>
                     </div>
                 </div>

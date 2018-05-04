@@ -23,7 +23,7 @@ export default class GoodsItem extends Component{
                 <div className='goodsItem_info'>
                     {name&&<div className='goodsItem_title'>{name}</div>}
                     {description&&<div className='goodsItem_subtitle'>{description}</div>}
-                    {price&&<div className='goodsItem_price'>{price}购物券</div>}
+                    {price&&<div className='goodsItem_price'>{price}￥</div>}
                 </div>
             </div>
         );

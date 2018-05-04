@@ -76,7 +76,7 @@ export default class extends Component {
             },
             noUserid: true,
             ok:(res) => {
-                Toast.success('密码重置成功', 1, () => openurl('$/'));
+                Toast.success('密码重置成功', 1, () => openurl('$'));
             }
         })
     }

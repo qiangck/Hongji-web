@@ -187,7 +187,7 @@ export default class extends Component {
                                                 <img
                                                     className="box_title_icon"
                                                     src='./resource/images/icon_quan.png'
-                                                />购物券</p>
+                                                />￥</p>
                                             <p className="box_subtitle">{this.numFormat('shopcoin')}</p>
                                         </div>
                                     </li>

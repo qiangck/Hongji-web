@@ -121,7 +121,7 @@ export default class extends Component {
             <div className='cart'>
                 <div className='fixBar'>
                     <div className='total'>
-                        <p>总计：<strong>{total}购物券</strong></p>
+                        <p>总计：<strong>{total}￥</strong></p>
                         <a onClick={this.settlement}>去结算</a>
                     </div>
                 </div>
@@ -140,7 +140,7 @@ export default class extends Component {
                                 <div className='content'>
                                     <div className='name'>{cartList[item].name}</div>
                                     <div className='line'>
-                                        <p className='price'>{cartList[item].price}购物券</p>
+                                        <p className='price'>{cartList[item].price}￥</p>
                                         <Adjust value={cartList[item].value} onChange={this.adjust.bind(this,item)}/>
                                     </div>
                                 </div>

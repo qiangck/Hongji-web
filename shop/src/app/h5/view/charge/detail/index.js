@@ -96,7 +96,7 @@ export default class extends Component {
                     <div className='productInfo'>
                         {product&&<div className='productTitle'>{product.name}</div>}
                         <div className='productPrice'>
-                            {product&&<span className='priceNumber'>{product.price}购物券</span>}
+                            {product&&<span className='priceNumber'>{product.price}￥</span>}
                         </div>
                     </div>
                     <div className='productTake'>

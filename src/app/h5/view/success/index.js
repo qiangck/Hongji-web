@@ -24,7 +24,7 @@ export default class extends Component {
                     <Button type="warning" onClick={()=>{
                         localStorage.removeItem("cart");
                         localStorage.removeItem("cartRevise");
-                        openurl('$/');
+                        openurl('$');
                     }}>返回首页</Button>
                 </div>
             </div>
