@@ -55,7 +55,7 @@ export default class extends Component {
                             <div>
                                 <span>{endTime.getFullYear()}年</span>
                                 <span>{endTime.getMonth()+1}月</span>
-                                <span>{endTime.getDate()}日<img src="./resource/images/icon-xiala.png"/></span>
+                                <span>{endTime.getDate()}日</span>
                             </div>
                         </div>
                     </DatePicker>
